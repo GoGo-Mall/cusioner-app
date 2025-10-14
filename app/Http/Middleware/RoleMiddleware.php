@@ -13,20 +13,16 @@ class RoleMiddleware
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $roles): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-
+        // dd($roles);
         $userRole = session('user_role');
 
         if (!$userRole) {
             return redirect('/login')->with('error', 'Silakan login dulu.');
         }
 
-        // Pastikan $roles selalu berupa array
-        $roles = is_array($roles) ? $roles : explode(',', $roles);
-        dd($userRole, $roles);
-
-
+        // $roles sudah berupa array ['admin', 'user']
         if (!in_array($userRole, $roles)) {
             return redirect('/login')->with('error', 'Anda tidak punya akses ke halaman ini.');
         }
