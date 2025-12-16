@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Answar;
 use App\Models\Respondent;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,14 @@ class RespondentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $respondents = Respondent::findOrFail($id);
+
+        $answers = Answar::with(['question', 'option'])
+        ->where('respondent_id', $id)
+        ->orderBy('question_id')
+        ->get();
+
+        return view('pages.admin.respondent.show', compact('respondents', 'answers'));
     }
 
     /**

@@ -12,8 +12,19 @@
                 <th>Actions</th>
             </tr>
         </thead>
-        <tbody id="respondentsTable">
-            <!-- Data dari localStorage -->
+        <tbody id="">
+            <!-- Data dari localStorage -->\
+            @foreach ($respondents as $item)
+                <tr>
+                    <td>{{$item->agent_name}}</td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->email}}</td>
+                    <td>{{$item->product}}</td>
+                    <td>
+                        <a href="{{route('respon.show', $item->id)}}" class="btn btn-sm btn-warning">Show</a>
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 @endsection
@@ -41,7 +52,7 @@
             respondents.forEach(r => {
                 const row = tbody.insertRow();
                 row.innerHTML = `
-            <td>${r.name_agent}</td>
+            <td>${r.agent_name }</td>
             <td>${r.name}</td>
             <td>${r.email}</td>
             <td>${r.product}</td>

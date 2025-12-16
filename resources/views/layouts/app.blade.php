@@ -10,8 +10,7 @@
 
   <div class="form-container">
     <div class="form-header">
-      <h2>Formulir Kuesioner Kepuasan Pengguna</h2>
-      <p>Harap isi formulir berikut dengan jujur untuk membantu kami meningkatkan layanan.</p>
+      <img src="{{asset('assets/image/banner.jpg')}}" width="650" alt="">
     </div>
 
   @yield('content')
