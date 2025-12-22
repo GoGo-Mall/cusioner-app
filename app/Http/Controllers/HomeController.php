@@ -20,17 +20,21 @@ class HomeController extends Controller
         $request->validate([
             'agent_name' => 'required|string|max:255',
             'name' => 'required|string|max:255',
-            'email' => 'nullable|email',
+            'phone' => 'nullable|string',
             'product' => 'required|string'
         ]);
+        // dd($request->all());
 
         // Simpan Data Responden
         $response = Respondent::create([
             'agent_name' => $request->agent_name,
             'name' => $request->name,
-            'email' => $request->email,
+            'phone' => $request->phone,
             'product' => $request->product
         ]);
+
+
+
 
         // Loop semua pertanyaan untuk simpan jawaban
         $questions = Question::all();
