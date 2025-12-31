@@ -49,7 +49,7 @@ class HomeController extends Controller
         Http::asForm()->post('https://sisgesit.site/sisgesit/api/quiz/updateQuiz', [
             'user'     => 'quiz_gogomall',
             'password' => 'Quiz@yXm0UW',
-            'id'       => '211719',
+            'id'       => $customer->id_docs,
         ]);
 
 
