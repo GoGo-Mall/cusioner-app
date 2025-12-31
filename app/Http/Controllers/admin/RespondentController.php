@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Answar;
 use App\Models\Respondent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RespondentController extends Controller
 {
@@ -14,7 +15,35 @@ class RespondentController extends Controller
      */
     public function index()
     {
-        $respondents = Respondent::all();
+
+
+        $respondents = DB::table('answars as a')
+            ->leftJoin('respondents as r', 'a.respondent_id', '=', 'r.id')
+            ->leftJoin('options as o', 'a.option_id', '=', 'o.id')
+            ->leftJoin('customer_agents as ca', 'ca.phone', '=', 'r.phone')
+            ->select(
+                'r.agent_name',
+                DB::raw('SUM(o.value) AS score'),
+                DB::raw("
+            COUNT(
+                DISTINCT CASE
+                    WHEN ca.flag = '0' OR ca.flag IS NULL
+                    THEN ca.phone
+                END
+            ) AS norespon
+        "),
+                DB::raw("
+            COUNT(
+                DISTINCT CASE
+                    WHEN ca.flag = '1'
+                    THEN ca.phone
+                END
+            ) AS respon
+        ")
+            )
+            ->groupBy('r.agent_name')
+            ->get();
+
         return view('pages.admin.respondent.index', compact('respondents'));
     }
 
@@ -42,9 +71,9 @@ class RespondentController extends Controller
         $respondents = Respondent::findOrFail($id);
 
         $answers = Answar::with(['question', 'option'])
-        ->where('respondent_id', $id)
-        ->orderBy('question_id')
-        ->get();
+            ->where('respondent_id', $id)
+            ->orderBy('question_id')
+            ->get();
 
         return view('pages.admin.respondent.show', compact('respondents', 'answers'));
     }

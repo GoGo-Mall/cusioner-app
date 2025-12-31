@@ -15,13 +15,16 @@
         <tbody id="">
             <!-- Data dari localStorage -->\
             @foreach ($respondents as $item)
+                @php
+                    $score = $item->score / 5 / $item->norespon;
+                @endphp
                 <tr>
                     <td>{{$item->agent_name}}</td>
-                    <td>{{$item->name}}</td>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->product}}</td>
+                    <td>{{$score}}</td>
+                    <td><small>{{$item->respon}}</small>/ <small>{{$item->norespon}}</small></td>
+                    <td></td>
                     <td>
-                        <a href="{{route('respon.show', $item->id)}}" class="btn btn-sm btn-warning">Show</a>
+                        <a href="" class="btn btn-sm btn-warning">Show</a>
                     </td>
                 </tr>
             @endforeach

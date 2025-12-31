@@ -12,6 +12,8 @@ class CustomerAgent extends Model
         'no_product',
         'customer',
         'phone',
-        'flag'
+        'flag',
+        'id_docs',
+        'no_docs'
     ];
 }
