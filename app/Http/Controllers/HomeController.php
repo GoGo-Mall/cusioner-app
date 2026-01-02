@@ -69,6 +69,10 @@ class HomeController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Terima Kasih! Jawaban anda sudah tersimpan');
+        return redirect()->route('end.cusioner');
+    }
+
+    public function cusioner_end(){
+        return view('pages.terimakasih');
     }
 }

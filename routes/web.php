@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // Halaman utama (kuesioner publik)
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/cusioner/end', [HomeController::class, 'cusioner_end'])->name('end.cusioner');
 Route::post('/store', [HomeController::class, 'store'])->name('cusioner.store');
 
 // Auth routes (login/logout)
