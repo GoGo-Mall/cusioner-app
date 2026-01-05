@@ -34,9 +34,7 @@
                         <small>{{ $item->norespon }}</small>
                     </td>
                     <td>
-                        @if ($item->norespon == 0)
-                            Belum Ada Respon
-                        @elseif ($score >= 80)
+                        @if ($score >= 80)
                             Sangat Baik
                         @elseif ($score >= 60)
                             Cukup Baik
