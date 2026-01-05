@@ -6,9 +6,9 @@
         <thead>
             <tr>
                 <th>Name Agent</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Product</th>
+                <th>Score</th>
+                <th>Jumlah Respone</th>
+                <th>Status</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,13 +16,33 @@
             <!-- Data dari localStorage -->\
             @foreach ($respondents as $item)
                 @php
-                    $score = $item->score / 5 / $item->norespon;
+                    $score = 0;
+                    if ($item->norespon > 0) {
+                        $score = $item->score / 5 / $item->respon / 100;
+                    }
                 @endphp
                 <tr>
-                    <td>{{$item->agent_name}}</td>
-                    <td>{{$score}}</td>
-                    <td><small>{{$item->respon}}</small>/ <small>{{$item->norespon}}</small></td>
-                    <td></td>
+                    <td>{{ $item->agent_name }}</td>
+                    <td>{{ number_format($score, 2) }}</td>
+                    <td>
+                        <small>{{ $item->respon }}</small> /
+                        <small>{{ $item->norespon }}</small>
+                    </td>
+                    <td>
+                        @if ($item->norespon == 0)
+                            Belum Ada Respon
+                        @elseif ($score >= 80)
+                            Sangat Baik
+                        @elseif ($score >= 60)
+                            Cukup Baik
+                        @elseif ($score >= 40)
+                            Baik
+                        @elseif ($score >= 20)
+                            Kurang
+                        @else
+                            Sangat Kurang
+                        @endif
+                    </td>
                     <td>
                         <a href="" class="btn btn-sm btn-warning">Show</a>
                     </td>
