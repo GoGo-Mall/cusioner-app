@@ -16,9 +16,14 @@
             <!-- Data dari localStorage -->
             @foreach ($respondents as $item)
                 @php
+                    $jumlahSoal = 5;
+                    $nilaiMaksSoal = 100;
+
                     $score = 0;
-                    if ($item->norespon > 0) {
-                        $score = $item->score / 5 / $item->respon / 100;
+
+                    if ($item->respon > 0) {
+                        $maxScore = $item->respon * $jumlahSoal * $nilaiMaksSoal;
+                        $score = ($item->score / $maxScore) * 100;
                     }
                 @endphp
                 <tr>
