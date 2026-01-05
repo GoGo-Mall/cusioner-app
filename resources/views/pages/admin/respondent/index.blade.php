@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody id="">
-            <!-- Data dari localStorage -->\
+            <!-- Data dari localStorage -->
             @foreach ($respondents as $item)
                 @php
                     $score = 0;

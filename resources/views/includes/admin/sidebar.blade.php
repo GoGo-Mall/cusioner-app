@@ -79,6 +79,14 @@
                          </a>
                      </li>
                  @endif
+                 <li class="nav-item">
+                     <a href="{{route('logout')}}" class="nav-link">
+                         <i class="nav-icon fas fa-tachometer-alt"></i>
+                         <p class="text-danger">
+                             logout
+                         </p>
+                     </a>
+                 </li>
              </ul>
          </nav>
          <!-- /.sidebar-menu -->
