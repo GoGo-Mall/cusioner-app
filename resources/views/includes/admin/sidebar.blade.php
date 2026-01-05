@@ -81,7 +81,7 @@
                  @endif
                  <li class="nav-item">
                      <a href="{{route('logout')}}" class="nav-link">
-                         <i class="nav-icon fas fa-tachometer-alt"></i>
+                         <i class="nav-icon"></i>
                          <p class="text-danger">
                              logout
                          </p>
